@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.__pyc
+temp.wave
+
+models/
+*.h5
+*.keras
+
+dataset/
