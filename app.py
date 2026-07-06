@@ -43,6 +43,9 @@ emoji = {
     "sad": "😢",
     "surprised": "😲"
 }
+@st.cache_resource
+def load_emotion_model():
+    return load_model("emotion_model.h5")
 
 model = load_model("emotion_model.h5")
 
@@ -52,52 +55,43 @@ uploaded_file = st.file_uploader(
 )
 if uploaded_file is not None:
     st.audio(uploaded_file)
-
-    with open("temp.wav", "wb") as f:
+    temp_path = "temp.wav"
+    with open("temp_path", "wb") as f:
         f.write(uploaded_file.read())
 
-    audio, sr = librosa.load("temp.wav", sr=None)
+    audio, sr = librosa.load("temp_path", sr=None)
     fig, ax = plt.subplots(figsize=(10,3))
     librosa.display.waveshow(audio, sr=sr)
     ax.set_title("Audio Waveform")
     st.pyplot(fig)
+    try:
+         feature = extract_features("temp.wav")
+         feature = feature.reshape(1, 40, 1)
 
-    feature = extract_features("temp.wav")
-    feature = feature.reshape(1, 40, 1)
+         prediction = model.predict(feature, verbose=0)
+         confidence = prediction[0] * 100
 
-    prediction = model.predict(feature, verbose=0)
+         top3 = np.argsort(confidence)[::-1][:3]
+         st.subheader("🏆 Top 3 Predictions")
+         for i in top3:
+             st.write(f"**{emotion_labels[i].capitalize()}** : {confidence[i]:.2f}%")
 
-    confidence = prediction[0] * 100
+         predicted_index = np.argmax(prediction)
+         emotion = emotion_labels[predicted_index]
+         st.success(f"## 🎯 Predicted Emotion: {emotion.capitalize()} {emoji[emotion]}")
 
-    top3 = np.argsort(confidence)[::-1][:3]
+         confidence_df= pd.DataFrame({
+            "Emotion":[e.capitalize() for e in emotion_labels],
+            "Confidence(%)":prediction[0]*100
+         })
 
-    st.subheader("🏆 Top 3 Predictions")
-
-    for i in top3:
-         st.write(f"**{emotion_labels[i].capitalize()}** : {confidence[i]:.2f}%")
-
-    predicted_index = np.argmax(prediction)
-    emotion = emotion_labels[predicted_index]
-
-    st.success(f"## 🎯 Predicted Emotion: {emotion.capitalize()} {emoji[emotion]}")
-
-    confidence_df= pd.DataFrame({
-        "Emotion":[e.capitalize() for e in emotion_labels],
-        "Confidence(%)":prediction[0]*100
-    })
-
-    st.subheader("📊 Emotion Prediction Confidence")
-
-    
-    confidence_values = prediction[0] * 100
-
-    fig,ax = plt.subplots(figsize=(8,4))
-    ax.bar(emotion_labels,confidence_values)
-    ax.set_ylabel("Confidence(%)")
-    ax.set_title("Emotion Prediction Confidence")
-    plt.xticks(rotation=30)
-    st.pyplot(fig)
-
-
-
-    st.info("✅ Prediction completed successfully!")
+         st.subheader("📊 Emotion Prediction Confidence")
+         fig,ax = plt.subplots(figsize=(8,4))
+         ax.bar(emotion_labels,confidence_values)
+         ax.set_ylabel("Confidence(%)")
+         ax.set_title("Emotion Prediction Confidence")
+         plt.xticks(rotation=30)
+         st.pyplot(fig)
+     except Exception as e:
+         st.error(f"⚠️ Could not process this audio file: {e}")
+     st.info("✅ Prediction completed successfully!")
