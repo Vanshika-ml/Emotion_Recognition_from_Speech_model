@@ -2,7 +2,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv1D, MaxPooling1D
 from tensorflow.keras.layers import Flatten, Dense, Dropout
 
-def build_model():
+def build_model(input_shape(40,1), num_classes=8):
 
     model = Sequential()
 
@@ -19,7 +19,7 @@ def build_model():
 
     model.add(Dense(64, activation='relu'))
 
-    model.add(Dense(8, activation='softmax'))
+    model.add(Dense(num_classes, activation='softmax'))
 
     model.compile(
         optimizer='adam',
