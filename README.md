@@ -61,8 +61,8 @@ Emotion_Recognition_from_Speech_model/
 ├── dataset/
 ├── images/
 │   ├── home.png
-        waveform.png
-        prediction_result.png
+│   ├── waveform.png
+│   ├── prediction_result.png
 │   ├── prediction_confidence.png
 │   ├── accuracy.png
 │   ├── loss.png
@@ -142,7 +142,7 @@ Emotion_Recognition_from_Speech_model/
 Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/Emotion_Recognition_from_Speech_model.git
+git clone https://github.com/Vanshika-ml/Emotion_Recognition_from_Speech_model.git
 ```
 
 Move into project directory
