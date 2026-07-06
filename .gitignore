@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+temp.wav
+*.h5
+dataset/
+.ipynb_checkpoints/
+venv/
+.env
