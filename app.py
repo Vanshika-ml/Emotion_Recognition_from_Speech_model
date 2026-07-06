@@ -50,22 +50,17 @@ uploaded_file = st.file_uploader(
     "📂 Upload WAV File",
     type=["wav"]
 )
-
 if uploaded_file is not None:
-
     st.audio(uploaded_file)
-    audio, sr = librosa.load("temp.wav", sr=None)
-
-    fig, ax = plt.subplots(figsize=(10,3))
-
-    librosa.display.waveshow(audio, sr=sr)
-
-    ax.set_title("Audio Waveform")
-
-    st.pyplot(fig)
 
     with open("temp.wav", "wb") as f:
         f.write(uploaded_file.read())
+
+    audio, sr = librosa.load("temp.wav", sr=None)
+    fig, ax = plt.subplots(figsize=(10,3))
+    librosa.display.waveshow(audio, sr=sr)
+    ax.set_title("Audio Waveform")
+    st.pyplot(fig)
 
     feature = extract_features("temp.wav")
     feature = feature.reshape(1, 40, 1)
