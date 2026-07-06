@@ -16,22 +16,23 @@ emotion_dict = {
 
 paths = []
 emotions = []
-
+skipped = 0
 for actor in os.listdir(dataset_path):
 
     actor_path = os.path.join(dataset_path, actor)
 
     if os.path.isdir(actor_path):
-
+        continue
         for file in os.listdir(actor_path):
 
-            if file.endswith(".wav"):
-
+            if not file.endswith(".wav"):
+                continue
+            try:    
                 emotion = file.split("-")[2]
-
+                emotion = emotion_dict[emotion_code]
                 paths.append(os.path.join(actor_path, file))
 
-                emotions.append(emotion_dict[emotion])
+                emotions.append(emotion)
 
 df = pd.DataFrame()
 
@@ -39,6 +40,7 @@ df["Path"] = paths
 df["Emotion"] = emotions
 
 print(df.head())
+print(f"\nTotal files processed: {len(df)} | Skipped: {skipped}")
 
 df.to_csv("emotion_data.csv", index=False)
 
