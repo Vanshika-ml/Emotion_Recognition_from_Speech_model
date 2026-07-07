@@ -21,18 +21,22 @@ for actor in os.listdir(dataset_path):
 
     actor_path = os.path.join(dataset_path, actor)
 
-    if os.path.isdir(actor_path):
+    if not os.path.isdir(actor_path):
         continue
-        for file in os.listdir(actor_path):
+    for file in os.listdir(actor_path):
 
-            if not file.endswith(".wav"):
-                continue
-            try:    
-                emotion = file.split("-")[2]
+        if not file.endswith(".wav"):
+            continue
+        try:    
+                emotion_code = file.split("-")[2]
                 emotion = emotion_dict[emotion_code]
                 paths.append(os.path.join(actor_path, file))
 
                 emotions.append(emotion)
+        except (IndexError, KeyError):
+            skipped += 1
+            print(f"⚠️ Skipping malformed filename: {file}")
+
 
 df = pd.DataFrame()
 
