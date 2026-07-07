@@ -67,3 +67,138 @@ Instead of averaging MFCC features into a single vector, this project extracts a
 ---
 
 ## 📁 Project Structure
+<<<<<<< HEAD
+=======
+
+```
+Emotion_Recognition_from_Speech_model/
+│
+├── dataset/
+├── images/
+│   ├── home.png
+│   ├── waveform.png
+│   ├── prediction_result.png
+│   ├── prediction_confidence.png
+│   ├── accuracy.png
+│   ├── loss.png
+│   └── confusion_matrix.png
+│
+├── feature_extraction.py
+├── preprocess.py
+├── train.py
+├── model.py
+├── test.py
+├── app.py
+├── emotion_data.csv
+├── requirements.txt
+├── README.md
+
+```
+
+---
+
+## 📊 Model Performance
+
+- Model : CNN
+- Number of Classes : 8
+- Dataset : RAVDESS
+- Feature Extraction : MFCC
+- Optimizer : Adam
+- Loss Function : Sparse Categorical Crossentropy
+
+---
+
+# 📷 Screenshots
+
+## 🏠 Home Page
+
+![Home](images/home.png)
+
+---
+
+## Audio Waveform
+
+![Waveform](images/waveform.png)
+
+---
+
+## Emotion Prediction Result
+
+![Result](images/prediction_result.png)
+
+---
+
+## 📊 Emotion Prediction Confidence
+
+![Confidence](images/prediction_confidence.png)
+
+---
+
+## 📈 Training Accuracy
+
+![Accuracy](images/accuracy.png)
+
+---
+
+## 📉 Training Loss
+
+![Loss](images/loss.png)
+
+---
+
+## 📊 Confusion Matrix
+
+![Confusion Matrix](images/confusion_matrix.png)
+
+---
+
+## ▶️ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/Vanshika-ml/Emotion_Recognition_from_Speech_model.git
+```
+
+Move into project directory
+
+```bash
+cd Emotion_Recognition_from_Speech_model
+```
+
+Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Run Streamlit App
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## 📌 Future Improvements
+
+- Mel Spectrogram Visualization
+- LSTM + CNN Hybrid Model
+- Real-time Microphone Prediction
+- Model Comparison
+- Deployment on Streamlit Cloud
+- Better UI/UX
+
+---
+
+## 👩‍💻 Author
+
+**Vanshika Varshney**
+
+GitHub:
+https://github.com/Vanshika-ml
+
+---
+
+⭐ If you found this project useful, don't forget to star the repository.
+>>>>>>> 257b8f3643dfe0730fdf12161f4348c52ee1e20e
