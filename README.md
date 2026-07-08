@@ -99,13 +99,13 @@ Emotion_Recognition_from_Speech_model/
 
 ## 📊 Model Performance
 
-- Model : CNN
+- Model : CNN + LSTM hybrid
 - Number of Classes : 8
-- Dataset : RAVDESS
-- Feature Extraction : MFCC
+- Dataset : RAVDESS (1440 audio samples, 24 professional actors)
+- Feature Extraction : MFCC (time-series sequence, 130 time-steps × 40 coefficients)
 - Optimizer : Adam
 - Loss Function : Sparse Categorical Crossentropy
-
+- **Test Accuracy : 66%** (on 288 held-out test samples)
 ---
 
 # 📷 Screenshots
